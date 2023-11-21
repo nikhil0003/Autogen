@@ -1,11 +1,11 @@
 [
     {
         "model": "gpt-4-vision-preview",
-        "api_key": "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"
+        "api_key": "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"
     },
     {
         
          "model": "gpt-4",
-        "api_key": "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"
+        "api_key": "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"
     }
     ]

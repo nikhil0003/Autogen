@@ -16,7 +16,6 @@ config_list_4v = autogen.config_list_from_json(
     },
 )
 
-print(config_list_4v)
 
 config_list_gpt4 = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
@@ -25,7 +24,6 @@ config_list_gpt4 = autogen.config_list_from_json(
         "model": ["gpt-4"],
     },
 )
-print(config_list_gpt4)
 
 
 gpt4_llm_config = {"config_list": config_list_gpt4, "seed": 42}
@@ -39,11 +37,19 @@ image_agent = MultimodalConversableAgent(
     llm_config={"config_list": config_list_4v, "temperature": 0.5, "max_tokens": 300}
 )
 
+
 user_proxy = autogen.UserProxyAgent(
     name="User_proxy",
     system_message="A human admin.",
     human_input_mode="NEVER", # Try between ALWAYS or NEVER
     max_consecutive_auto_reply=0
+)
+
+
+wokmarketAgent = autogen.AssistantAgent(
+    name="Workmarket Support Agent",
+    llm_config=gpt4_llm_config,
+    system_message="""You are a workmarket support agent. If you dont know answer reply to User_proxy with "I don't know answer.Please contact workmarket support team." """
 )
 
 # Ask the question with an image
